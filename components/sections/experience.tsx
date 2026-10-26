@@ -44,7 +44,7 @@ function Entry({ entry, index }: { entry: TimelineEntry; index: number }) {
         <p className="mt-1 text-xs uppercase tracking-[0.18em] text-subtle">{label}</p>
       </div>
 
-      <div className="rounded-2xl border border-border bg-card/60 p-6 transition-colors duration-500 hover:border-white/15 md:ml-[60px]">
+      <div className="rounded-2xl border border-border bg-card/60 p-6 transition-colors duration-500 hover:border-ink/15 md:ml-[60px]">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div>
             <h3 className="text-lg font-semibold tracking-tight">{entry.title}</h3>

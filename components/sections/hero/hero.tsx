@@ -33,7 +33,7 @@ export function Hero({ cvAvailable }: { cvAvailable: boolean }) {
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-16 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-10">
         <div>
           <FadeIn delay={0.1}>
-            <span className="inline-flex items-center gap-2.5 rounded-full border border-border bg-white/3 py-1.5 pl-2.5 pr-3.5 text-xs font-medium text-muted-foreground backdrop-blur-md">
+            <span className="inline-flex items-center gap-2.5 rounded-full border border-border bg-ink/3 py-1.5 pl-2.5 pr-3.5 text-xs font-medium text-muted-foreground backdrop-blur-md">
               <span className="relative flex size-2">
                 {site.availability.available && (
                   <span className="absolute inset-0 animate-pulse-ring rounded-full bg-success" />

@@ -41,7 +41,7 @@ export function Contact() {
 
             <Reveal delay={0.3} className="mt-10 space-y-3">
               <div className="flex items-center gap-4 pb-3">
-                <div className="relative size-14 shrink-0 overflow-hidden rounded-full border border-white/15 ring-4 ring-brand/10">
+                <div className="relative size-14 shrink-0 overflow-hidden rounded-full border border-ink/15 ring-4 ring-brand/10">
                   <Image
                     src={portrait.src}
                     alt=""

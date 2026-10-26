@@ -55,7 +55,7 @@ function StageNode({ stage, status, progress }: { stage: PipelineStage; status: 
   return (
     <div className="relative size-16 shrink-0">
       <svg viewBox="0 0 72 72" className="absolute -inset-1 size-18 -rotate-90" aria-hidden="true">
-        <circle cx="36" cy="36" r="33" fill="none" strokeWidth="2" className="stroke-white/6" />
+        <circle cx="36" cy="36" r="33" fill="none" strokeWidth="2" className="stroke-ink/6" />
         {status === "running" && (
           <motion.circle
             cx="36"
@@ -96,7 +96,7 @@ function StageNode({ stage, status, progress }: { stage: PipelineStage; status: 
         aria-hidden="true"
         className={cn(
           "absolute -right-1 -top-1 grid size-6 place-items-center rounded-full border-2 border-card transition-colors duration-300",
-          (status === "idle" || status === "skipped") && "bg-surface-2 ring-1 ring-white/15",
+          (status === "idle" || status === "skipped") && "bg-surface-2 ring-1 ring-ink/15",
           status === "running" && "bg-card text-brand",
           status === "success" && "bg-success text-background",
           status === "error" && "bg-destructive text-background",
@@ -288,7 +288,7 @@ export function Pipeline() {
             onViewportEnter={onEnter}
             onViewportLeave={() => setInView(false)}
             viewport={{ amount: 0.3 }}
-            className="border-gradient relative overflow-hidden rounded-3xl bg-card/80"
+            className="theme-dark border-gradient relative overflow-hidden rounded-3xl bg-card/80"
           >
             <div aria-hidden="true" className="bg-grid absolute inset-0 opacity-60 [--grid-size:40px]" />
 
@@ -321,7 +321,7 @@ export function Pipeline() {
                 <button
                   type="button"
                   onClick={newCommit}
-                  className="inline-flex h-9 items-center gap-2 rounded-full border border-border px-3.5 text-[13px] text-muted-foreground transition-colors hover:border-white/20 hover:text-foreground"
+                  className="inline-flex h-9 items-center gap-2 rounded-full border border-border px-3.5 text-[13px] text-muted-foreground transition-colors hover:border-ink/20 hover:text-foreground"
                 >
                   <GitCommitHorizontal className="size-4" />
                   New commit
@@ -349,7 +349,7 @@ export function Pipeline() {
                       strokeWidth="2"
                       strokeDasharray="6 6"
                       vectorEffect="non-scaling-stroke"
-                      className="animate-dash-flow stroke-white/15"
+                      className="animate-dash-flow stroke-ink/15"
                     />
                   </svg>
                   <motion.div
@@ -410,7 +410,7 @@ export function Pipeline() {
 
               <div className="relative">
               {/* Mobile: vertical track between the first and last node centres */}
-              <div aria-hidden="true" className="absolute bottom-8 left-8 top-8 w-px bg-white/10 md:hidden">
+              <div aria-hidden="true" className="absolute bottom-8 left-8 top-8 w-px bg-ink/10 md:hidden">
                 <motion.div
                   className={cn(
                     "absolute inset-x-0 top-0 origin-top bg-linear-to-b",
@@ -462,7 +462,7 @@ export function Pipeline() {
             </div>
 
             {/* Stats */}
-            <dl className="relative grid grid-cols-3 border-t border-border bg-white/2 text-center">
+            <dl className="relative grid grid-cols-3 border-t border-border bg-ink/2 text-center">
               <div className="px-3 py-4">
                 <dt className="text-xs text-subtle">Runs this session</dt>
                 <dd className="mt-1 text-lg font-semibold tabular-nums">{runs.length}</dd>

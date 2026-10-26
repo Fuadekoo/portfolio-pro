@@ -54,7 +54,7 @@ export function Skills() {
                     return (
                       <li key={skill.name}>
                         <div
-                          className="group/tile relative flex items-center gap-3 overflow-hidden rounded-xl border border-border bg-white/2.5 px-3 py-3 transition-[border-color,background-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:bg-white/5"
+                          className="group/tile relative flex items-center gap-3 overflow-hidden rounded-xl border border-border bg-ink/2.5 px-3 py-3 transition-[border-color,background-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:bg-ink/5"
                         >
                           <span
                             aria-hidden="true"

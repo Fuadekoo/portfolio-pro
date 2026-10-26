@@ -36,8 +36,8 @@ function StackGlance() {
                 <motion.span
                   key={skill.name}
                   title={skill.name}
-                  className="grid size-7 place-items-center rounded-lg border border-border bg-white/3"
-                  style={{ boxShadow: `inset 0 -2px 0 ${techColor(skill.icon)}55` }}
+                  className="grid size-7 place-items-center rounded-lg border border-border bg-ink/3"
+                  style={{ boxShadow: `inset 0 -2px 0 color-mix(in oklab, ${techColor(skill.icon)} 35%, transparent)` }}
                   initial={{ opacity: 0, scale: 0.6 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, amount: 0.8 }}

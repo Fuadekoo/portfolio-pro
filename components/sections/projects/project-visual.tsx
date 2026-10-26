@@ -22,7 +22,7 @@ export function ProjectVisual({
   const style = { "--h": project.hue } as CSSProperties;
 
   return (
-    <div className={cn("relative aspect-16/10 overflow-hidden bg-[#0b0b12]", className)} style={style}>
+    <div className={cn("theme-dark relative aspect-16/10 overflow-hidden bg-[#0b0b12]", className)} style={style}>
       {cover.composed ? (
         <Image
           src={cover.src}
@@ -45,11 +45,11 @@ export function ProjectVisual({
             }}
           />
           <div aria-hidden="true" className="bg-grid absolute inset-0 opacity-50 [--grid-size:28px]" />
-          <div className="absolute left-[7%] top-[11%] w-[106%] overflow-hidden rounded-tl-xl border border-white/12 bg-[#0e0e16] shadow-[0_30px_80px_-20px_rgb(0_0_0/0.85)]">
-            <div aria-hidden="true" className="flex items-center gap-1.5 border-b border-white/8 bg-[#14141c] px-3 py-2">
-              <span className="size-1.5 rounded-full bg-white/25" />
-              <span className="size-1.5 rounded-full bg-white/25" />
-              <span className="size-1.5 rounded-full bg-white/25" />
+          <div className="absolute left-[7%] top-[11%] w-[106%] overflow-hidden rounded-tl-xl border border-ink/12 bg-[#0e0e16] shadow-[0_30px_80px_-20px_rgb(0_0_0/0.85)]">
+            <div aria-hidden="true" className="flex items-center gap-1.5 border-b border-ink/8 bg-[#14141c] px-3 py-2">
+              <span className="size-1.5 rounded-full bg-ink/25" />
+              <span className="size-1.5 rounded-full bg-ink/25" />
+              <span className="size-1.5 rounded-full bg-ink/25" />
             </div>
             <Image
               src={cover.src}

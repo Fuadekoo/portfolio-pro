@@ -26,7 +26,7 @@ export function CopyEmail({ email }: { email: string }) {
     <button
       type="button"
       onClick={copy}
-      className="relative grid size-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-white/20 hover:text-foreground"
+      className="relative grid size-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-ink/20 hover:text-foreground"
       aria-label={copied ? "Email address copied" : "Copy email address"}
     >
       <AnimatePresence mode="wait" initial={false}>

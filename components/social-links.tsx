@@ -31,7 +31,7 @@ export function SocialLinks({ className, size = "md" }: { className?: string; si
               title={social.label}
               {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className={cn(
-                "group grid place-items-center rounded-full border border-border bg-white/3 text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/8 hover:text-foreground",
+                "group grid place-items-center rounded-full border border-border bg-ink/3 text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-ink/20 hover:bg-ink/8 hover:text-foreground",
                 size === "lg" ? "size-12" : "size-10",
               )}
             >

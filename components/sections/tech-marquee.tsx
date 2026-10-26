@@ -17,7 +17,7 @@ export function TechMarquee() {
   );
 
   return (
-    <section aria-label="Technologies I work with" className="relative border-y border-border bg-white/1 py-7">
+    <section aria-label="Technologies I work with" className="relative border-y border-border bg-ink/1 py-7">
       <div className="mask-fade-x group flex overflow-hidden">
         <div className="flex animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
           {row(false)}

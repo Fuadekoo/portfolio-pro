@@ -1,5 +1,5 @@
 function Bar({ className }: { className: string }) {
-  return <div className={`animate-pulse rounded-full bg-white/6 ${className}`} />;
+  return <div className={`animate-pulse rounded-full bg-ink/6 ${className}`} />;
 }
 
 export default function Loading() {
@@ -16,7 +16,7 @@ export default function Loading() {
           <Bar className="h-4 w-5/6" />
         </div>
       </div>
-      <div className="mt-12 aspect-16/10 animate-pulse rounded-3xl border border-border bg-white/3" />
+      <div className="mt-12 aspect-16/10 animate-pulse rounded-3xl border border-border bg-ink/3" />
     </div>
   );
 }

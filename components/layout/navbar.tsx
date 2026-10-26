@@ -12,6 +12,7 @@ import { useSmoothScroll } from "@/components/providers";
 import { Button } from "@/components/ui/button";
 import { EASE_OUT_EXPO } from "@/components/motion/reveal";
 import { SocialLinks } from "@/components/social-links";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 type NavId = (typeof navItems)[number]["id"];
 
@@ -43,7 +44,7 @@ function useActiveSection(enabled: boolean) {
 export function Logo({ className }: { className?: string }) {
   return (
     <span className={cn("flex items-center gap-2.5", className)}>
-      <span className="border-gradient relative grid size-9 place-items-center rounded-xl bg-white/4 font-display text-xl italic text-foreground">
+      <span className="border-gradient relative grid size-9 place-items-center rounded-xl bg-ink/4 font-display text-xl italic text-foreground">
         {site.initials}
         <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-brand shadow-[0_0_12px] shadow-brand" />
       </span>
@@ -111,7 +112,7 @@ export function Navbar() {
           <Logo />
         </Link>
 
-        <ul className="hidden items-center gap-1 rounded-full border border-border bg-white/2 p-1 backdrop-blur-md md:flex">
+        <ul className="hidden items-center gap-1 rounded-full border border-border bg-ink/2 p-1 backdrop-blur-md lg:flex">
           {navItems.map((item) => {
             const isActive = active === item.id;
             return (
@@ -130,7 +131,7 @@ export function Navbar() {
                 {isActive && (
                   <motion.span
                     layoutId="nav-active"
-                    className="absolute inset-0 rounded-full border border-white/10 bg-white/8"
+                    className="absolute inset-0 rounded-full border border-ink/10 bg-ink/8"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
@@ -140,7 +141,8 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <Button asChild size="sm" variant="outline" className="hidden md:inline-flex">
+          <ThemeToggle />
+          <Button asChild size="sm" variant="outline" className="hidden lg:inline-flex">
             <Link href={hrefFor("contact")} onClick={(e) => onNavClick(e, "contact")}>
               Let&apos;s talk
               <ArrowUpRight />
@@ -149,7 +151,7 @@ export function Navbar() {
 
           <Dialog.Root open={menuOpen} onOpenChange={onMenuChange}>
             <Dialog.Trigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open menu">
+              <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open menu">
                 <Menu className="size-5" />
               </Button>
             </Dialog.Trigger>

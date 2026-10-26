@@ -46,9 +46,9 @@ export function Services() {
         >
           {services.map((service, i) => (
             <motion.li key={service.title} variants={fadeUp}>
-              <SpotlightCard className="group h-full rounded-2xl border border-border bg-card/60 p-7 transition-[border-color,transform] duration-500 hover:-translate-y-1 hover:border-white/15">
+              <SpotlightCard className="group h-full rounded-2xl border border-border bg-card/60 p-7 transition-[border-color,transform] duration-500 hover:-translate-y-1 hover:border-ink/15">
                 <div className="flex items-center justify-between">
-                  <span className="relative grid size-12 place-items-center rounded-xl border border-border bg-white/4 text-foreground transition-all duration-500 group-hover:border-brand/40 group-hover:bg-brand/10 group-hover:text-[#c3ceff]">
+                  <span className="relative grid size-12 place-items-center rounded-xl border border-border bg-ink/4 text-foreground transition-all duration-500 group-hover:border-brand/40 group-hover:bg-brand/10 group-hover:text-brand-soft">
                     <span className="absolute inset-0 rounded-xl bg-brand/30 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-60" />
                     <span className="relative transition-transform duration-500 ease-out-expo group-hover:-rotate-6 group-hover:scale-110">
                       <ServiceIcon icon={service.icon} />

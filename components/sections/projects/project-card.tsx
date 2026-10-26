@@ -20,24 +20,24 @@ export function ProjectCard({ project }: { project: Project }) {
       onPointerMove={trackPointer}
       className={cn(
         "spotlight group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/70 transition-[transform,border-color,box-shadow] duration-500 ease-out-expo",
-        "hover:-translate-y-1.5 hover:border-white/15 hover:shadow-[0_30px_80px_-30px_hsl(var(--h)_90%_60%/0.45)] focus-within:border-white/20",
+        "hover:-translate-y-1.5 hover:border-ink/15 hover:shadow-[0_30px_80px_-30px_hsl(var(--h)_90%_60%/0.45)] focus-within:border-ink/20",
       )}
       style={{ "--h": project.hue, "--spot-color": `hsl(${project.hue} 90% 65%)` } as React.CSSProperties}
     >
-      <div className="relative m-2 overflow-hidden rounded-[18px] border border-white/6">
+      <div className="theme-dark relative m-2 overflow-hidden rounded-[18px] border border-ink/6">
         <ViewTransition name={`project-${project.slug}`} share="morph" default="none">
           <ProjectVisual project={project} sizes="(min-width: 768px) 50vw, 100vw" />
         </ViewTransition>
         <div className="absolute left-3 top-3 flex gap-1.5">
-          <Badge className="border-white/10 bg-black/50 text-foreground/90 backdrop-blur-md">{project.category}</Badge>
+          <Badge className="border-ink/10 bg-black/50 text-foreground/90 backdrop-blur-md">{project.category}</Badge>
         </div>
-        <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-black/55 px-2.5 py-1 text-[11px] text-foreground/85 backdrop-blur-md">
+        <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-black/55 px-2.5 py-1 text-[11px] text-foreground/85 backdrop-blur-md">
           <Images className="size-3" />
           {gallery.length} {gallery.length === 1 ? "screen" : "screens"}
         </span>
         <span
           aria-hidden="true"
-          className="absolute right-3 top-3 grid size-10 translate-y-1 place-items-center rounded-full border border-white/15 bg-black/50 text-foreground opacity-0 backdrop-blur-md transition-all duration-500 ease-out-expo group-hover:translate-y-0 group-hover:opacity-100"
+          className="absolute right-3 top-3 grid size-10 translate-y-1 place-items-center rounded-full border border-ink/15 bg-black/50 text-foreground opacity-0 backdrop-blur-md transition-all duration-500 ease-out-expo group-hover:translate-y-0 group-hover:opacity-100"
         >
           <ArrowUpRight className="size-4 transition-transform duration-500 group-hover:rotate-45" />
         </span>
@@ -81,7 +81,7 @@ export function ProjectCard({ project }: { project: Project }) {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] text-muted-foreground transition-colors hover:bg-white/6 hover:text-foreground"
+                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] text-muted-foreground transition-colors hover:bg-ink/6 hover:text-foreground"
               >
                 <ExternalLink className="size-3.5" />
                 Live demo
@@ -93,7 +93,7 @@ export function ProjectCard({ project }: { project: Project }) {
                 href={project.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] text-muted-foreground transition-colors hover:bg-white/6 hover:text-foreground"
+                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] text-muted-foreground transition-colors hover:bg-ink/6 hover:text-foreground"
               >
                 <GitHubIcon className="size-3.5" />
                 Source

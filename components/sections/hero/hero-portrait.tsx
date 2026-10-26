@@ -76,7 +76,7 @@ export function HeroPortrait() {
         className="relative"
       >
         {/* Rotating light border */}
-        <div className="relative overflow-hidden rounded-[2rem] p-[1.5px] shadow-[0_50px_120px_-30px_rgb(110_139_255/0.55)]">
+        <div className="theme-dark relative overflow-hidden rounded-[2rem] p-[1.5px] shadow-[0_50px_120px_-30px_rgb(110_139_255/0.55)]">
           <div
             aria-hidden="true"
             className="absolute left-1/2 top-1/2 aspect-square w-[160%] -translate-x-1/2 -translate-y-1/2 animate-[spin_9s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0deg,rgb(110_139_255)_60deg,rgb(167_123_255)_110deg,transparent_160deg,transparent_220deg,rgb(69_208_255)_280deg,transparent_330deg)]"
@@ -114,7 +114,7 @@ export function HeroPortrait() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: EASE_OUT_EXPO, delay: 1.2 }}
             >
-              <div className="glass flex items-center justify-between gap-3 rounded-2xl border border-white/12 px-4 py-3">
+              <div className="glass flex items-center justify-between gap-3 rounded-2xl border border-ink/12 px-4 py-3">
                 <div className="min-w-0">
                   <p className="truncate font-semibold tracking-tight">{site.name}</p>
                   <p className="truncate text-xs text-muted-foreground">{site.role}</p>
@@ -136,7 +136,7 @@ export function HeroPortrait() {
 
       {/* Deploy terminal */}
       <FloatingCard className="-left-6 top-[14%] sm:-left-14" delay={1.35} from={{ x: -24 }}>
-        <div aria-hidden="true" className="glass rounded-xl border border-white/12 px-3.5 py-2.5 font-mono text-[11px] leading-[1.7] shadow-2xl">
+        <div aria-hidden="true" className="glass rounded-xl border border-ink/12 px-3.5 py-2.5 font-mono text-[11px] leading-[1.7] shadow-2xl">
           <p>
             <span className="text-brand">$</span> git push origin main
           </p>
@@ -149,7 +149,7 @@ export function HeroPortrait() {
 
       {/* Stack */}
       <FloatingCard className="-right-4 top-[52%] sm:-right-10" delay={1.5} from={{ x: 24 }} floatDelay="-3s">
-        <div aria-hidden="true" className="glass flex items-center gap-2.5 rounded-xl border border-white/12 px-3 py-2.5 shadow-2xl">
+        <div aria-hidden="true" className="glass flex items-center gap-2.5 rounded-xl border border-ink/12 px-3 py-2.5 shadow-2xl">
           {(["nextjs", "typescript", "node", "postgresql", "docker"] as const).map((n) => (
             <TechIcon key={n} name={n} className="size-4" />
           ))}

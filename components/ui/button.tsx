@@ -9,12 +9,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "shine bg-primary text-primary-foreground shadow-[0_8px_30px_-12px_rgb(255_255_255/0.5)] hover:shadow-[0_10px_40px_-10px_rgb(124_147_255/0.75)]",
+          "shine bg-primary text-primary-foreground shadow-[0_8px_30px_-12px_rgb(255_255_255/0.5)] hover:shadow-[0_10px_40px_-10px_rgb(124_147_255/0.75)] light:shadow-[0_8px_24px_-10px_rgb(12_12_20/0.45)]",
         brand:
           "shine bg-linear-to-r from-brand to-brand-2 text-white glow-brand hover:brightness-110",
         outline:
-          "border border-border-strong bg-white/2 text-foreground backdrop-blur-sm hover:border-white/25 hover:bg-white/6",
-        ghost: "text-muted-foreground hover:bg-white/6 hover:text-foreground",
+          "border border-border-strong bg-ink/2 text-foreground backdrop-blur-sm hover:border-ink/25 hover:bg-ink/6",
+        ghost: "text-muted-foreground hover:bg-ink/6 hover:text-foreground",
         link: "rounded-none px-0 text-foreground link-underline",
       },
       size: {

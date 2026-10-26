@@ -131,11 +131,11 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                   {project.features.map((f) => (
                     <StaggerItem
                       key={f}
-                      className="flex gap-3 rounded-2xl border border-border bg-card/50 p-4 text-[14.5px] leading-relaxed text-muted-foreground transition-colors hover:border-white/15"
+                      className="flex gap-3 rounded-2xl border border-border bg-card/50 p-4 text-[14.5px] leading-relaxed text-muted-foreground transition-colors hover:border-ink/15"
                     >
                       <span
                         className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full"
-                        style={{ background: `hsl(${project.hue} 80% 60% / 0.15)`, color: `hsl(${project.hue} 85% 72%)` }}
+                        style={{ background: `hsl(${project.hue} 80% 60% / 0.15)`, color: `hsl(${project.hue} 75% 52%)` }}
                       >
                         <Check className="size-3" strokeWidth={3} />
                       </span>
@@ -231,7 +231,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                 href={`/projects/${next.slug}`}
                 prefetch
                 transitionTypes={["nav-forward"]}
-                className="group grid items-center gap-6 overflow-hidden rounded-3xl border border-border bg-card/50 p-3 transition-colors duration-500 hover:border-white/15 sm:grid-cols-[1fr_280px]"
+                className="group grid items-center gap-6 overflow-hidden rounded-3xl border border-border bg-card/50 p-3 transition-colors duration-500 hover:border-ink/15 sm:grid-cols-[1fr_280px]"
               >
                 <div className="flex items-center justify-between gap-6 p-3 sm:p-5">
                   <div>

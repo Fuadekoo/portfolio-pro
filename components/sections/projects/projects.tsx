@@ -43,7 +43,7 @@ export function Projects() {
                         "relative rounded-full border px-4 py-2 text-[13px] font-medium transition-colors duration-300",
                         active
                           ? "border-transparent text-primary-foreground"
-                          : "border-border text-muted-foreground hover:border-white/20 hover:text-foreground",
+                          : "border-border text-muted-foreground hover:border-ink/20 hover:text-foreground",
                       )}
                     >
                       {active && (

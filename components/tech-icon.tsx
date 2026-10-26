@@ -43,12 +43,12 @@ const brandIcons = {
 
 export type TechIconName = keyof typeof brandIcons | "aws" | "api";
 
-/** Very dark brand colours are unreadable on the dark theme; lift them to white. */
+/** Very dark brand colours vanish on the dark theme; use the theme foreground instead. */
 function displayColor(hex: string) {
   const n = parseInt(hex, 16);
   const [r, g, b] = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
   const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-  return luminance < 0.28 ? "#f3f3f6" : `#${hex}`;
+  return luminance < 0.28 ? "var(--foreground)" : `#${hex}`;
 }
 
 export function techColor(name: TechIconName) {
@@ -68,7 +68,7 @@ export function TechIcon({
 }) {
   const color = colored ? techColor(name) : "currentColor";
 
-  if (name === "aws") return <AwsIcon className={cn("size-6", className)} style={{ color: colored ? "#f3f3f6" : undefined }} />;
+  if (name === "aws") return <AwsIcon className={cn("size-6", className)} style={{ color: colored ? "var(--foreground)" : undefined }} />;
   if (name === "api") return <ApiIcon className={cn("size-6", className)} style={{ color }} />;
 
   return (
@@ -76,7 +76,8 @@ export function TechIcon({
       viewBox="0 0 24 24"
       aria-hidden="true"
       className={cn("size-6", className)}
-      fill={color}
+      // `style`, not the `fill` attribute: var() does not resolve in SVG presentation attributes.
+      style={{ fill: color }}
     >
       <path d={brandIcons[name].path} />
     </svg>
