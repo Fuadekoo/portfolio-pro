@@ -1,19 +1,22 @@
-import { Mail } from "lucide-react";
-import { GitHubIcon, LinkedInIcon } from "@/components/icons";
+import { Mail, Phone } from "lucide-react";
+import { GitHubIcon, LinkedInIcon, TelegramIcon } from "@/components/icons";
 import { site, type Social } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 const icons = {
   github: GitHubIcon,
   linkedin: LinkedInIcon,
+  telegram: TelegramIcon,
   email: Mail,
+  phone: Phone,
 } satisfies Record<Social["icon"], unknown>;
 
-/** Social profiles plus email. Entries with an empty href are skipped. */
+/** Social profiles plus email and phone. Entries with an empty href are skipped. */
 export function getSocials(): Social[] {
   return [
     ...site.socials.filter((s) => s.href),
     ...(site.email ? [{ label: "Email", href: `mailto:${site.email}`, icon: "email" as const }] : []),
+    ...(site.phone ? [{ label: "Phone", href: site.phone.href, icon: "phone" as const }] : []),
   ];
 }
 

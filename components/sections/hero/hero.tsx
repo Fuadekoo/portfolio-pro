@@ -89,7 +89,7 @@ export function Hero({ cvAvailable }: { cvAvailable: boolean }) {
             </Magnetic>
             {cvAvailable ? (
               <Button asChild size="lg" variant="outline" className="group">
-                <a href={site.cvPath} download>
+                <a href={site.cvPath} download="Fuad-Abdurahman-CV.pdf">
                   Download CV
                   <Download className="transition-transform duration-300 group-hover:translate-y-0.5" />
                 </a>

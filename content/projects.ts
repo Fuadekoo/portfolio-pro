@@ -3,7 +3,7 @@ import { projectMedia, type ProjectMedia } from "@/content/media.generated";
 /**
  * Projects shown on the home page and at /projects/[slug].
  *
- * Screenshots live in data/projectsImage/ and are processed by `npm run media`
+ * Screenshots live in public/source/projects/ and are processed by `npm run media`
  * (see scripts/build-media.mjs). Each project's `slug` matches its media entry.
  *
  * TODO for each project:
@@ -11,6 +11,17 @@ import { projectMedia, type ProjectMedia } from "@/content/media.generated";
  *  - `role` / `contributions`: what you personally did
  *  - `liveUrl` / `sourceUrl`: once you've confirmed the links are public
  */
+
+/** Which gallery screens appear on the laptop and phone mockups. */
+export type ProjectShowcase = {
+  /** Gallery indices for the laptop, in order. Omit to show the composed cover. */
+  laptop?: number[];
+  /**
+   * Gallery indices for the phone. Desktop screens are cropped to the phone's
+   * shape; `focus` (CSS object-position) picks the part that stays visible.
+   */
+  phone: { index: number; focus?: string }[];
+};
 
 export type ProjectCategory = "Education" | "Healthcare" | "Real Estate" | "Mobile";
 
@@ -34,6 +45,7 @@ export type Project = {
   sourceUrl?: string;
   /** Accent hue (0–360) used for glows on the card and case-study page. */
   hue: number;
+  showcase: ProjectShowcase;
   featured?: boolean;
 };
 
@@ -63,6 +75,7 @@ export const projects: Project[] = [
     stack: [], // TODO
     // liveUrl: "https://e-learning.darelkubra.com", // TODO: confirm it's public
     hue: 220,
+    showcase: { laptop: [0, 3, 4, 1], phone: [{ index: 0, focus: "100% 0%" }, { index: 2, focus: "100% 0%" }] },
     featured: true,
   },
   {
@@ -88,6 +101,7 @@ export const projects: Project[] = [
     ],
     stack: [], // TODO
     hue: 35,
+    showcase: { laptop: [0, 1], phone: [{ index: 1, focus: "29% 0%" }] },
     featured: true,
   },
   {
@@ -115,6 +129,7 @@ export const projects: Project[] = [
     stack: [], // TODO
     // liveUrl: "https://mindcare.darelkubra.com", // TODO: confirm it's public
     hue: 200,
+    showcase: { laptop: [0, 1, 2, 4], phone: [{ index: 0, focus: "0% 0%" }, { index: 6, focus: "66% 0%" }] },
     featured: true,
   },
   {
@@ -139,6 +154,7 @@ export const projects: Project[] = [
     ],
     stack: [], // TODO
     hue: 210,
+    showcase: { phone: [{ index: 0 }, { index: 1 }, { index: 2 }, { index: 3 }] },
   },
   {
     slug: "prime-card",
@@ -163,6 +179,7 @@ export const projects: Project[] = [
     ],
     stack: [], // TODO
     hue: 150,
+    showcase: { phone: [{ index: 2 }, { index: 3 }, { index: 4 }, { index: 5 }] },
   },
   {
     slug: "prime-rentals",
@@ -185,6 +202,7 @@ export const projects: Project[] = [
     ],
     stack: [], // TODO
     hue: 28,
+    showcase: { laptop: [0], phone: [{ index: 0, focus: "62% 0%" }] },
   },
 ];
 
@@ -196,6 +214,16 @@ export function getProject(slug: string) {
 
 export function getProjectMedia(slug: Project["slug"]): ProjectMedia {
   return projectMedia[slug];
+}
+
+/** Resolves a project's showcase indices to images. */
+export function getShowcase(project: Project) {
+  const { cover, gallery } = getProjectMedia(project.slug);
+  const laptop = project.showcase.laptop?.map((i) => gallery[i]).filter(Boolean) ?? [cover];
+  const phone = project.showcase.phone
+    .filter(({ index }) => gallery[index])
+    .map(({ index, focus }) => ({ image: gallery[index], focus }));
+  return { laptop: laptop.length ? laptop : [cover], phone };
 }
 
 /** Badges for cards: the real stack once filled in, otherwise feature tags. */

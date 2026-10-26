@@ -44,7 +44,7 @@ export const projectMedia = {
         "src": "/projects/darulkubra-lms/03.webp",
         "width": 1280,
         "height": 612,
-        "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADQAQCdASoQAAgAA4BaJYwCdAEPh5C+AAD+8uUJ4+Du1ODmgPDkPa2DIryqOXKe7ivZeFjB1awAAA==",
+        "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoQAAgAA4BaJYwCdAEPh5C+AAD+8uUJ4+DuncKq46K96x3Gw9Ve2U93Fey8LGDq1gA=",
         "alt": "Course Q&A tab in dark mode",
         "device": "desktop"
       },
@@ -52,7 +52,7 @@ export const projectMedia = {
         "src": "/projects/darulkubra-lms/04.webp",
         "width": 1280,
         "height": 606,
-        "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADQAQCdASoQAAgAA4BaJYwCdAD0NoATwAD+7upCJ39Oufu3G0AFksNXztLKtmhi19fKhJsM4NAAAA==",
+        "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADQAQCdASoQAAgAA4BaJYwCdAD0NoATwAD+7upCJ39Oui0dJK7R4fu0rEl9umNGlxhZtoFEICI8AA==",
         "alt": "Student dashboard with enrolled courses and catalogue",
         "device": "desktop"
       },
@@ -68,7 +68,7 @@ export const projectMedia = {
         "src": "/projects/darulkubra-lms/06.webp",
         "width": 1280,
         "height": 612,
-        "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADQAQCdASoQAAgAA4BaJYgCdAEfbhD3AAD+9kIdgw3aCksmudnQFX8LYeG22EOcNRa8gmYA",
+        "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoQAAgAA4BaJYgCdAEfbhkt8AD+9kIdgw3aCksmudnQFX8SF++TTsIc4ai15BMwAAA=",
         "alt": "Create-course flow with media upload",
         "device": "desktop"
       }
@@ -309,8 +309,8 @@ export const projectMedia = {
 export const portrait: MediaImage = {
   "src": "/me/portrait.webp",
   "width": 960,
-  "height": 1200,
-  "blurDataURL": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAACwAwCdASoQABQAPu1iqU2ppaOiMAgBMB2JYgCsAB6AJ+wuOPzNJAD+7AHS7DmzPdqpCbe4YimXW6JZ4m4lQhvrzb3Uwuv+CTJD95lvDqi1MaQIDQbBy/jNjX5udlcYEDSR7kAA",
+  "height": 1201,
+  "blurDataURL": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADwAwCdASoQABQAPu1iqU2ppaOiMAgBMB2JZAC7AB6AJ+wuOY1jhyMAAP7sAdLsObM92qkJt7hiKZdbolnibiVCG+vNvdTyc/+1O4LXvPBJhcQ0W+/oHHLXMI33S51G7DAkAQ+5AAA=",
   "alt": "Portrait of Fuad"
 };
 

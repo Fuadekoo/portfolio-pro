@@ -1,35 +1,31 @@
 /**
- * Turns raw screenshots in data/ into optimized web assets.
+ * Turns the source screenshots in public/source/ into optimized web assets.
  *
  *   npm run media
  *
- * - Crops browser chrome / OS taskbars from desktop captures
+ * - Crops browser chrome / OS taskbars from desktop captures (pass { top, bottom })
  * - Frames mobile screenshots in a phone bezel (transparent WebP)
  * - Composes a 16:10 cover for mobile projects
  * - Crops the portrait
  * - Writes content/media.generated.ts (sizes + blur placeholders)
  *
- * To add screenshots: drop them in data/projectsImage/<folder>/, list them
- * below, and run the script again.
+ * To add screenshots: drop them in public/source/projects/<folder>/, list them
+ * below, and run the script again. Files in public/ are served as-is, so crop
+ * out browser chrome and anything personal before adding a source.
  */
 import fs from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
-const SRC = path.join(ROOT, "data", "projectsImage");
+const SRC = path.join(ROOT, "public", "source", "projects");
 const OUT = path.join(ROOT, "public", "projects");
 const MANIFEST = path.join(ROOT, "content", "media.generated.ts");
 
-// Browser chrome + taskbar sizes measured on the source captures.
-const CHROME_1280 = { top: 68, bottom: 40 };
-const CHROME_1920 = { top: 176, bottom: 72 };
-
 /**
- * Screens deliberately NOT published because they show personal data:
- *   melaschools/m3.png        – student ID cards with children's photos and names
- *   mindcare/md10–16, 18–20   – named students with case notes, diagnoses, phone numbers
- *   lms/lm5.jpg               – user profile with a phone number
+ * Sources are already cropped (no browser chrome or taskbar). Screens deliberately
+ * NOT published because they show personal data: MelaSchools student ID cards,
+ * MindCare student case records, and an LMS user profile with a phone number.
  */
 const projects = {
   "darulkubra-lms": {
@@ -38,10 +34,10 @@ const projects = {
     images: [
       ["lm6.jpg", "Video lesson player with course outline and progress"],
       ["lm3.jpg", "Lesson view with section navigation and final exam"],
-      ["16.jpg", "Course Q&A tab in dark mode", CHROME_1280],
-      ["lm4.jpg", "Student dashboard with enrolled courses and catalogue", { top: 36 }],
-      ["14.jpg", "Course management table for administrators", CHROME_1280],
-      ["13.jpg", "Create-course flow with media upload", CHROME_1280],
+      ["16.jpg", "Course Q&A tab in dark mode"],
+      ["lm4.jpg", "Student dashboard with enrolled courses and catalogue"],
+      ["14.jpg", "Course management table for administrators"],
+      ["13.jpg", "Create-course flow with media upload"],
     ],
   },
   melaschools: {
@@ -56,13 +52,13 @@ const projects = {
     dir: "mindcare",
     device: "desktop",
     images: [
-      ["md7.png", "Dashboard with case summary chart and appointment status", CHROME_1920],
-      ["md3.png", "Landing page introducing the wellbeing platform", CHROME_1920],
-      ["md5.png", "Feature overview: case management, scheduling, outcome tracking", CHROME_1920],
-      ["md6.png", "How-it-works section of the landing page", CHROME_1920],
-      ["md9.png", "Patient types and today's appointments", CHROME_1920],
-      ["md17.png", "Staff to-do list", CHROME_1920],
-      ["md1.png", "Phone-number sign-in screen", CHROME_1920],
+      ["md7.png", "Dashboard with case summary chart and appointment status"],
+      ["md3.png", "Landing page introducing the wellbeing platform"],
+      ["md5.png", "Feature overview: case management, scheduling, outcome tracking"],
+      ["md6.png", "How-it-works section of the landing page"],
+      ["md9.png", "Patient types and today's appointments"],
+      ["md17.png", "Staff to-do list"],
+      ["md1.png", "Phone-number sign-in screen"],
     ],
   },
   "prime-card": {
@@ -100,9 +96,8 @@ const projects = {
 };
 
 const PORTRAIT = {
-  src: path.join(ROOT, "data", "fufu.jpg"),
-  // 4:5 crop centred on the face (source is 6960x3904).
-  crop: { left: 2018, top: 0, width: 3122, height: 3904 },
+  // Already cropped to 4:5.
+  src: path.join(ROOT, "public", "source", "me", "portrait.jpg"),
   alt: "Portrait of Fuad",
 };
 
@@ -243,18 +238,18 @@ for (const [slug, cfg] of Object.entries(projects)) {
 }
 
 // Portrait
-const portraitBuf = await sharp(PORTRAIT.src).rotate().extract(PORTRAIT.crop).toBuffer();
+const portraitBuf = await sharp(PORTRAIT.src).rotate().toBuffer();
 const portrait = { ...(await save(portraitBuf, "../me/portrait.webp", { maxWidth: 960, quality: 82 })), alt: PORTRAIT.alt };
 portrait.src = "/me/portrait.webp";
 // JPEG copy for the Open Graph image (ImageResponse doesn't decode WebP).
 await sharp(portraitBuf).resize(480).jpeg({ quality: 80 }).toFile(path.join(ROOT, "public", "me", "portrait-og.jpg"));
 console.log("✓ portrait");
 
-// Background-removed portrait for the hero. data/fufu-cutout.png was produced once with
+// Background-removed portrait for the hero. portrait-cutout.png was produced once with
 // @imgly/background-removal-node (model: "medium") from the same photo.
 // The model leaves a faint 1-10% alpha haze over the removed background (invisible on dark,
 // a grey box on light). Remap alpha so that haze becomes fully transparent.
-const { data: px, info: pxInfo } = await sharp(path.join(ROOT, "data", "fufu-cutout.png"))
+const { data: px, info: pxInfo } = await sharp(path.join(ROOT, "public", "source", "me", "portrait-cutout.png"))
   .ensureAlpha()
   .raw()
   .toBuffer({ resolveWithObject: true });

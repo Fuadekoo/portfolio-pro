@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { Dialog } from "radix-ui";
-import { useCallback, useEffect, useState, ViewTransition, type CSSProperties, type KeyboardEvent } from "react";
+import { useCallback, useEffect, useState, type CSSProperties, type KeyboardEvent } from "react";
 import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
 import type { MediaImage } from "@/content/media.generated";
 import { useSmoothScroll } from "@/components/providers";
@@ -55,7 +55,7 @@ function Slide({ image, priority, large = false }: { image: MediaImage; priority
 }
 
 /** Screenshot gallery: animated stage, thumbnails, keyboard support and a fullscreen viewer. */
-export function ProjectGallery({ slug, images, hue }: { slug: string; images: MediaImage[]; hue: number }) {
+export function ProjectGallery({ images, hue }: { images: MediaImage[]; hue: number }) {
   const [[index, dir], setState] = useState<[number, number]>([0, 0]);
   const [open, setOpen] = useState(false);
   const { lock, unlock } = useSmoothScroll();
@@ -93,8 +93,7 @@ export function ProjectGallery({ slug, images, hue }: { slug: string; images: Me
         onKeyDown={onKey}
         className="theme-dark overflow-hidden rounded-3xl border border-border bg-card p-2 shadow-[0_40px_120px_-40px_rgb(0_0_0/0.9)] outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
-        <ViewTransition name={`project-${slug}`} share="morph" default="none">
-          <div className="group relative aspect-16/10 overflow-hidden rounded-[18px]" style={backdrop}>
+        <div className="group relative aspect-16/10 overflow-hidden rounded-[18px]" style={backdrop}>
             <div aria-hidden="true" className="bg-grid absolute inset-0 opacity-40 [--grid-size:32px]" />
             <AnimatePresence initial={false} custom={dir} mode="popLayout">
               <motion.div
@@ -145,7 +144,6 @@ export function ProjectGallery({ slug, images, hue }: { slug: string; images: Me
               {index + 1} / {count}
             </span>
           </div>
-        </ViewTransition>
       </div>
 
       <p className="mt-4 text-center text-sm text-muted-foreground" aria-live="polite">

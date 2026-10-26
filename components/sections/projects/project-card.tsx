@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { ViewTransition } from "react";
 import { ArrowUpRight, ExternalLink, Images } from "lucide-react";
 import { getProjectMedia, projectBadges, type Project } from "@/content/projects";
 import { GitHubIcon } from "@/components/icons";
@@ -25,9 +24,7 @@ export function ProjectCard({ project }: { project: Project }) {
       style={{ "--h": project.hue, "--spot-color": `hsl(${project.hue} 90% 65%)` } as React.CSSProperties}
     >
       <div className="theme-dark relative m-2 overflow-hidden rounded-[18px] border border-ink/6">
-        <ViewTransition name={`project-${project.slug}`} share="morph" default="none">
-          <ProjectVisual project={project} sizes="(min-width: 768px) 50vw, 100vw" />
-        </ViewTransition>
+        <ProjectVisual project={project} sizes="(min-width: 768px) 50vw, 100vw" transitionName={`project-${project.slug}`} />
         <div className="absolute left-3 top-3 flex gap-1.5">
           <Badge className="border-ink/10 bg-black/50 text-foreground/90 backdrop-blur-md">{project.category}</Badge>
         </div>

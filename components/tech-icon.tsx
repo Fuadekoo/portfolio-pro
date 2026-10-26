@@ -14,12 +14,13 @@ import {
   siPostgresql,
   siPrisma,
   siReact,
+  siStripe,
   siTailwindcss,
   siTypescript,
   type SimpleIcon,
 } from "simple-icons";
 import { cn } from "@/lib/utils";
-import { ApiIcon, AwsIcon } from "@/components/icons";
+import { ApiIcon, AwsIcon, ChapaIcon } from "@/components/icons";
 
 const brandIcons = {
   react: siReact,
@@ -39,9 +40,10 @@ const brandIcons = {
   git: siGit,
   github: siGithub,
   prisma: siPrisma,
+  stripe: siStripe,
 } satisfies Record<string, SimpleIcon>;
 
-export type TechIconName = keyof typeof brandIcons | "aws" | "api";
+export type TechIconName = keyof typeof brandIcons | "aws" | "api" | "chapa";
 
 /** Very dark brand colours vanish on the dark theme; use the theme foreground instead. */
 function displayColor(hex: string) {
@@ -54,6 +56,7 @@ function displayColor(hex: string) {
 export function techColor(name: TechIconName) {
   if (name === "aws") return "#FF9900";
   if (name === "api") return "#7c93ff";
+  if (name === "chapa") return "#7DC400";
   return displayColor(brandIcons[name].hex);
 }
 
@@ -70,6 +73,7 @@ export function TechIcon({
 
   if (name === "aws") return <AwsIcon className={cn("size-6", className)} style={{ color: colored ? "var(--foreground)" : undefined }} />;
   if (name === "api") return <ApiIcon className={cn("size-6", className)} style={{ color }} />;
+  if (name === "chapa") return <ChapaIcon className={cn("size-6", className)} style={{ color }} />;
 
   return (
     <svg

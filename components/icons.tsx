@@ -1,5 +1,5 @@
 import type { SVGProps } from "react";
-import { siGithub } from "simple-icons";
+import { siGithub, siTelegram } from "simple-icons";
 
 type IconProps = SVGProps<SVGSVGElement>;
 
@@ -9,6 +9,14 @@ export function GitHubIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
       <path d={siGithub.path} />
+    </svg>
+  );
+}
+
+export function TelegramIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d={siTelegram.path} />
     </svg>
   );
 }
@@ -68,6 +76,21 @@ export function ApiIcon(props: IconProps) {
       <path d="M16 4h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-1" />
       <circle cx="9.5" cy="12" r="1" fill="currentColor" />
       <circle cx="14.5" cy="12" r="1" fill="currentColor" />
+    </svg>
+  );
+}
+
+/** Chapa (Ethiopian payment gateway) isn't in simple-icons; a simplified mark. */
+export function ChapaIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M17.6 7.2A7 7 0 1 0 17.6 16.8"
+        stroke="currentColor"
+        strokeWidth="3.2"
+        strokeLinecap="round"
+      />
+      <circle cx="17.4" cy="12" r="1.9" fill="currentColor" />
     </svg>
   );
 }

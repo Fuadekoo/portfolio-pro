@@ -44,8 +44,6 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
   if (!project) notFound();
 
   const media = getProjectMedia(project.slug);
-  // Lead with the cover so the card image morphs straight into the first slide.
-  const slides = media.cover.composed ? [media.cover, ...media.gallery] : media.gallery;
   const index = projects.findIndex((p) => p.slug === project.slug);
   const next = projects[(index + 1) % projects.length];
 
@@ -100,9 +98,33 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             </Reveal>
           </header>
 
+          {/* The card's device mockup morphs into this hero. */}
           <Reveal delay={0.1} y={20} className="mt-12">
-            <ProjectGallery slug={project.slug} images={slides} hue={project.hue} />
+            <div className="rounded-3xl border border-border bg-card p-2 shadow-[0_40px_120px_-40px_rgb(0_0_0/0.9)]">
+              <ProjectVisual
+                project={project}
+                animated
+                priority
+                sizes="(min-width: 1152px) 1152px, 100vw"
+                transitionName={`project-${project.slug}`}
+                className="rounded-[18px]"
+              />
+            </div>
           </Reveal>
+
+          <section aria-labelledby="screens" className="mt-20">
+            <Reveal>
+              <div id="screens" className="flex items-baseline justify-between gap-4">
+                <Label>Screens</Label>
+                <span className="font-mono text-xs text-subtle">
+                  {media.gallery.length} {media.gallery.length === 1 ? "screen" : "screens"}
+                </span>
+              </div>
+            </Reveal>
+            <Reveal delay={0.05} y={20} className="mt-5">
+              <ProjectGallery images={media.gallery} hue={project.hue} />
+            </Reveal>
+          </section>
 
           <div className="mt-20 grid gap-14 lg:grid-cols-[1.5fr_1fr]">
             <div className="space-y-14">

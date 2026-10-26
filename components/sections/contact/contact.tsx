@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUpRight, Clock, Mail, MapPin } from "lucide-react";
+import { ArrowUpRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 import { portrait } from "@/content/media.generated";
 import { site } from "@/content/site";
 import { Reveal } from "@/components/motion/reveal";
@@ -7,7 +7,8 @@ import { WordReveal } from "@/components/motion/text-reveal";
 import { SocialLinks } from "@/components/social-links";
 import { AmbientBackground } from "@/components/sections/hero/ambient-background";
 import { ContactForm } from "@/components/sections/contact/contact-form";
-import { CopyEmail } from "@/components/sections/contact/copy-email";
+import { CopyButton } from "@/components/sections/contact/copy-email";
+import { TelegramIcon } from "@/components/icons";
 
 export function Contact() {
   return (
@@ -63,8 +64,28 @@ export function Contact() {
                   <span className="truncate font-medium link-underline">{site.email}</span>
                   <ArrowUpRight className="size-4 shrink-0 text-subtle transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </a>
-                <CopyEmail email={site.email} />
+                <CopyButton value={site.email} href={`mailto:${site.email}`} label="Email address" />
               </div>
+              {site.phone && (
+                <div className="flex items-center justify-between gap-4 rounded-2xl border border-border bg-card/60 p-4 pl-5">
+                  <a href={site.phone.href} className="group flex min-w-0 items-center gap-3">
+                    <Phone className="size-4 shrink-0 text-brand" />
+                    <span className="truncate font-medium link-underline">{site.phone.display}</span>
+                    <ArrowUpRight className="size-4 shrink-0 text-subtle transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </a>
+                  <CopyButton value={site.phone.display.replaceAll(" ", "")} href={site.phone.href} label="Phone number" />
+                </div>
+              )}
+              {telegram && (
+                <div className="flex items-center justify-between gap-4 rounded-2xl border border-border bg-card/60 p-4 pl-5">
+                  <a href={telegram.href} target="_blank" rel="noopener noreferrer" className="group flex min-w-0 items-center gap-3">
+                    <TelegramIcon className="size-4 shrink-0 text-brand" />
+                    <span className="truncate font-medium link-underline">@{telegram.href.split("/").pop()}</span>
+                    <ArrowUpRight className="size-4 shrink-0 text-subtle transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </a>
+                  <span className="shrink-0 text-xs text-subtle">Telegram</span>
+                </div>
+              )}
               <div className="flex flex-wrap gap-2 text-[13px] text-muted-foreground">
                 {site.location && (
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5">

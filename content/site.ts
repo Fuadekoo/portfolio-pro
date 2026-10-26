@@ -9,7 +9,7 @@
 export type Social = {
   label: string;
   href: string;
-  icon: "github" | "linkedin" | "email";
+  icon: "github" | "linkedin" | "telegram" | "email" | "phone";
 };
 
 export type Stat = {
@@ -42,12 +42,15 @@ export const site = {
     label: "Available for new projects",
   },
 
-  // TODO: replace with the address you want visitors to use.
-  email: "hello@example.com",
+  email: "fuadabdurahman@outlook.com",
+
+  /** `href` uses the international format so it dials from abroad. Set to null to hide. */
+  phone: { display: "0910 737 199", href: "tel:+251910737199" } as { display: string; href: string } | null,
 
   // Leave a social `href` empty to hide it.
   socials: [
     { label: "GitHub", href: "https://github.com/Fuadekoo", icon: "github" },
+    { label: "Telegram", href: "https://t.me/fuad0859", icon: "telegram" },
     // TODO: add your LinkedIn profile URL.
     { label: "LinkedIn", href: "", icon: "linkedin" },
   ] satisfies Social[] as Social[],

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { CircleCheck, CreditCard, Webhook } from "lucide-react";
 import { skillCategories } from "@/content/skills";
 import { SectionHeading } from "@/components/section-heading";
 import { SpotlightCard } from "@/components/spotlight-card";
@@ -15,7 +16,8 @@ const spans: Record<string, string> = {
   databases: "md:col-span-2",
   mobile: "md:col-span-2",
   tools: "md:col-span-2",
-  devops: "md:col-span-6",
+  payments: "md:col-span-2",
+  devops: "md:col-span-4",
 };
 
 export function Skills() {
@@ -70,6 +72,8 @@ export function Skills() {
                     );
                   })}
                 </ul>
+
+                {cat.id === "payments" && <PaymentFlow />}
               </SpotlightCard>
             </motion.div>
           ))}
@@ -86,5 +90,53 @@ export function Skills() {
         </motion.p>
       </div>
     </section>
+  );
+}
+
+const paymentSteps = [
+  { label: "Checkout", icon: CreditCard },
+  { label: "Webhook", icon: Webhook },
+  { label: "Paid", icon: CircleCheck },
+];
+
+/** A small checkout → verified webhook → paid diagram for the Payments card. */
+function PaymentFlow() {
+  return (
+    <div className="mt-5 rounded-xl border border-border bg-background/40 p-4">
+      <div className="relative flex items-start justify-between">
+        <div aria-hidden="true" className="absolute inset-x-[16%] top-[17px] h-px bg-ink/10">
+          <motion.span
+            className="absolute -top-[2px] size-[5px] rounded-full bg-success shadow-[0_0_10px_var(--color-success)]"
+            initial={{ left: "0%", opacity: 0 }}
+            animate={{ left: ["0%", "100%"], opacity: [0, 1, 1, 0] }}
+            transition={{ duration: 2.4, ease: "easeInOut", repeat: Infinity, repeatDelay: 0.6 }}
+          />
+        </div>
+        {paymentSteps.map(({ label, icon: Icon }, i) => (
+          <div key={label} className="relative flex w-1/3 flex-col items-center gap-2">
+            <span
+              className={cn(
+                "grid size-9 place-items-center rounded-full border bg-card",
+                i === paymentSteps.length - 1 ? "border-success/40 text-success" : "border-border text-muted-foreground",
+              )}
+            >
+              <Icon className="size-4" aria-hidden="true" />
+            </span>
+            <span className="font-mono text-[11px] text-subtle">{label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-4 flex items-center justify-between gap-3 border-t border-dashed border-border pt-3 text-xs">
+        <span className="text-muted-foreground">Signed webhooks, idempotent retries</span>
+        <span className="flex gap-1.5 font-mono text-[11px]">
+          {["ETB", "USD"].map((c) => (
+            <span key={c} className="rounded-md border border-border bg-ink/2.5 px-1.5 py-0.5 text-foreground/80">
+              {c}
+            </span>
+          ))}
+        </span>
+      </div>
+    </div>
   );
 }

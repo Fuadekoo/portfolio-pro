@@ -54,6 +54,15 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
+    id: "payments",
+    title: "Payments",
+    description: "Checkout, webhooks and payouts, local and global.",
+    skills: [
+      { name: "Stripe", icon: "stripe" },
+      { name: "Chapa", icon: "chapa" },
+    ],
+  },
+  {
     id: "devops",
     title: "DevOps",
     description: "Reproducible builds and dependable deploys.",

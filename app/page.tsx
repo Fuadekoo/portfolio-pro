@@ -26,6 +26,7 @@ export default function HomePage() {
     description: site.intro,
     url: absoluteUrl("/"),
     email: `mailto:${site.email}`,
+    ...(site.phone ? { telephone: site.phone.href.replace("tel:", "") } : {}),
     sameAs: getSocials()
       .filter((s) => s.href.startsWith("http"))
       .map((s) => s.href),

@@ -56,11 +56,13 @@ Honesty rules built into the content layer:
 - **Empty sections disappear.** Testimonials/achievements render nothing until you add entries;
   an empty social `href` hides that icon.
 - **CV:** put your file at `public/cv.pdf`. Until it exists, the button shows "CV coming soon".
-- **Screenshots and photo:** raw files live in `data/` (`data/projectsImage/<project>/`, `data/fufu.jpg`).
-  Run `npm run media` to crop browser chrome and taskbars, frame mobile screens, compose covers,
-  crop the portrait and regenerate `content/media.generated.ts` (sizes + blur placeholders).
-  Choose which screenshots are published in `scripts/build-media.mjs`. Screens showing personal
-  data (student records, ID cards, phone numbers) are deliberately excluded there.
+- **Screenshots and photo:** source files live in `public/source/` (`projects/<folder>/`,
+  `me/portrait.jpg`). They are served publicly, so crop browser chrome, taskbars and anything
+  personal before adding one. Run `npm run media` to frame mobile screens, compose covers and
+  regenerate `public/projects/` and `content/media.generated.ts` (sizes + blur placeholders).
+  Choose which screenshots are published in `scripts/build-media.mjs`.
+- **Device mockups:** each project's `showcase` in `content/projects.ts` picks which screens
+  appear on the laptop and the phone in its card and case-study hero.
 
 ### Light & dark theme
 
@@ -72,8 +74,8 @@ dark in both themes (screenshot frames, the pipeline console, the code window).
 
 ### Hero portrait
 
-The hero uses a background-removed cutout of `data/fufu.jpg`, saved as `data/fufu-cutout.png`
-(made with `@imgly/background-removal-node`). To use a new photo, replace both files and run
+The hero uses a background-removed cutout of `public/source/me/portrait.jpg`, saved as
+`public/source/me/portrait-cutout.png` (made with `@imgly/background-removal-node`). To use a new photo, replace both files and run
 `npm run media`.
 
 ## Contact form
