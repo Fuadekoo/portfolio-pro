@@ -1,4 +1,6 @@
+import Image from "next/image";
 import { ArrowUpRight, Clock, Mail, MapPin } from "lucide-react";
+import { portrait } from "@/content/media.generated";
 import { site } from "@/content/site";
 import { Reveal } from "@/components/motion/reveal";
 import { WordReveal } from "@/components/motion/text-reveal";
@@ -17,7 +19,7 @@ export function Contact() {
           <div>
             <Reveal y={12}>
               <p className="mb-5 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                <span className="text-brand">06</span>
+                <span className="text-brand">07</span>
                 <span className="h-px w-8 bg-linear-to-r from-brand/70 to-transparent" />
                 Contact
               </p>
@@ -38,6 +40,23 @@ export function Contact() {
             </Reveal>
 
             <Reveal delay={0.3} className="mt-10 space-y-3">
+              <div className="flex items-center gap-4 pb-3">
+                <div className="relative size-14 shrink-0 overflow-hidden rounded-full border border-white/15 ring-4 ring-brand/10">
+                  <Image
+                    src={portrait.src}
+                    alt=""
+                    fill
+                    sizes="56px"
+                    placeholder="blur"
+                    blurDataURL={portrait.blurDataURL}
+                    className="object-cover object-[50%_25%]"
+                  />
+                </div>
+                <div>
+                  <p className="font-medium">{site.name}</p>
+                  <p className="text-sm text-muted-foreground">You&apos;ll be talking to me directly.</p>
+                </div>
+              </div>
               <div className="flex items-center justify-between gap-4 rounded-2xl border border-border bg-card/60 p-4 pl-5">
                 <a href={`mailto:${site.email}`} className="group flex min-w-0 items-center gap-3">
                   <Mail className="size-4 shrink-0 text-brand" />

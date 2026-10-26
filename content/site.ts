@@ -84,4 +84,4 @@ export const navItems = [
   { id: "contact", label: "Contact" },
 ] as const;
 
-export type SectionId = (typeof navItems)[number]["id"] | "services" | "recognition";
+export type SectionId = (typeof navItems)[number]["id"] | "workflow" | "services" | "recognition";

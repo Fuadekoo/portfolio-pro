@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ViewTransition } from "react";
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
-import { getProject, projects } from "@/content/projects";
+import { ArrowLeft, ArrowRight, Check, ExternalLink } from "lucide-react";
+import { getProject, getProjectMedia, projects } from "@/content/projects";
 import { GitHubIcon } from "@/components/icons";
-import { Badge, SampleBadge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { MaskLine } from "@/components/motion/text-reveal";
+import { ProjectGallery } from "@/components/sections/projects/project-gallery";
 import { ProjectVisual } from "@/components/sections/projects/project-visual";
 
 export function generateStaticParams() {
@@ -19,12 +20,22 @@ export async function generateMetadata({ params }: PageProps<"/projects/[slug]">
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return { title: "Project not found" };
+  const { cover } = getProjectMedia(project.slug);
   return {
     title: project.title,
     description: project.summary,
     alternates: { canonical: `/projects/${project.slug}` },
-    openGraph: { title: project.title, description: project.summary, url: `/projects/${project.slug}` },
+    openGraph: {
+      title: project.title,
+      description: project.summary,
+      url: `/projects/${project.slug}`,
+      images: [{ url: cover.src, width: cover.width, height: cover.height, alt: cover.alt }],
+    },
   };
+}
+
+function Label({ children }: { children: React.ReactNode }) {
+  return <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-subtle">{children}</h2>;
 }
 
 export default async function ProjectPage({ params }: PageProps<"/projects/[slug]">) {
@@ -32,6 +43,9 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
   const project = getProject(slug);
   if (!project) notFound();
 
+  const media = getProjectMedia(project.slug);
+  // Lead with the cover so the card image morphs straight into the first slide.
+  const slides = media.cover.composed ? [media.cover, ...media.gallery] : media.gallery;
   const index = projects.findIndex((p) => p.slug === project.slug);
   const next = projects[(index + 1) % projects.length];
 
@@ -65,35 +79,38 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             <div>
               <Reveal y={10} className="flex flex-wrap items-center gap-2">
                 <Badge variant="brand">{project.category}</Badge>
+                <Badge>{project.platform}</Badge>
                 {project.year && <Badge>{project.year}</Badge>}
-                {project.sample && <SampleBadge />}
               </Reveal>
               <h1 className="mt-5 text-5xl font-semibold leading-[0.95] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
                 <MaskLine immediate delay={0.05}>
                   <span className="text-silver">{project.title}</span>
                 </MaskLine>
               </h1>
+              {project.client && (
+                <Reveal delay={0.1} y={8}>
+                  <p className="mt-4 text-muted-foreground">
+                    Built for <span className="text-foreground">{project.client}</span>
+                  </p>
+                </Reveal>
+              )}
             </div>
             <Reveal delay={0.15}>
               <p className="text-lg leading-relaxed text-muted-foreground">{project.summary}</p>
             </Reveal>
           </header>
 
-          <div className="mt-12 overflow-hidden rounded-3xl border border-border bg-card p-2 shadow-[0_40px_120px_-40px_rgb(0_0_0/0.9)]">
-            <div className="overflow-hidden rounded-[18px]">
-              <ViewTransition name={`project-${project.slug}`} share="morph" default="none">
-                <ProjectVisual project={project} priority sizes="(min-width: 1152px) 1152px, 100vw" />
-              </ViewTransition>
-            </div>
-          </div>
+          <Reveal delay={0.1} y={20} className="mt-12">
+            <ProjectGallery slug={project.slug} images={slides} hue={project.hue} />
+          </Reveal>
 
-          <div className="mt-16 grid gap-14 lg:grid-cols-[1.5fr_1fr]">
-            <div className="space-y-12">
+          <div className="mt-20 grid gap-14 lg:grid-cols-[1.5fr_1fr]">
+            <div className="space-y-14">
               <section aria-labelledby="overview">
                 <Reveal>
-                  <h2 id="overview" className="font-mono text-xs uppercase tracking-[0.2em] text-subtle">
-                    Overview
-                  </h2>
+                  <div id="overview">
+                    <Label>Overview</Label>
+                  </div>
                 </Reveal>
                 <div className="mt-5 space-y-5">
                   {project.description.map((p, i) => (
@@ -104,37 +121,77 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                 </div>
               </section>
 
-              <section aria-labelledby="contributions">
+              <section aria-labelledby="features">
                 <Reveal>
-                  <h2 id="contributions" className="font-mono text-xs uppercase tracking-[0.2em] text-subtle">
-                    Key contributions
-                  </h2>
+                  <div id="features">
+                    <Label>Key features</Label>
+                  </div>
                 </Reveal>
-                <Stagger className="mt-5 space-y-3" interval={0.07}>
-                  {project.contributions.map((c, i) => (
+                <Stagger className="mt-5 grid gap-3 sm:grid-cols-2" interval={0.05}>
+                  {project.features.map((f) => (
                     <StaggerItem
-                      key={c}
-                      className="flex gap-4 rounded-2xl border border-border bg-card/50 p-5 text-[15px] leading-relaxed text-muted-foreground"
+                      key={f}
+                      className="flex gap-3 rounded-2xl border border-border bg-card/50 p-4 text-[14.5px] leading-relaxed text-muted-foreground transition-colors hover:border-white/15"
                     >
-                      <span className="font-mono text-xs text-brand">{String(i + 1).padStart(2, "0")}</span>
-                      {c}
+                      <span
+                        className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full"
+                        style={{ background: `hsl(${project.hue} 80% 60% / 0.15)`, color: `hsl(${project.hue} 85% 72%)` }}
+                      >
+                        <Check className="size-3" strokeWidth={3} />
+                      </span>
+                      {f}
                     </StaggerItem>
                   ))}
                 </Stagger>
               </section>
+
+              {project.contributions && project.contributions.length > 0 && (
+                <section aria-labelledby="contributions">
+                  <Reveal>
+                    <div id="contributions">
+                      <Label>My contributions</Label>
+                    </div>
+                  </Reveal>
+                  <Stagger className="mt-5 space-y-3" interval={0.07}>
+                    {project.contributions.map((c, i) => (
+                      <StaggerItem
+                        key={c}
+                        className="flex gap-4 rounded-2xl border border-border bg-card/50 p-5 text-[15px] leading-relaxed text-muted-foreground"
+                      >
+                        <span className="font-mono text-xs text-brand">{String(i + 1).padStart(2, "0")}</span>
+                        {c}
+                      </StaggerItem>
+                    ))}
+                  </Stagger>
+                </section>
+              )}
             </div>
 
             <aside className="lg:sticky lg:top-28 lg:self-start">
               <Reveal delay={0.1}>
                 <dl className="border-gradient relative space-y-6 rounded-2xl bg-card/60 p-6">
+                  {project.client && (
+                    <div>
+                      <dt className="text-xs uppercase tracking-[0.18em] text-subtle">Client</dt>
+                      <dd className="mt-1.5 font-medium">{project.client}</dd>
+                    </div>
+                  )}
                   <div>
-                    <dt className="text-xs uppercase tracking-[0.18em] text-subtle">Role</dt>
-                    <dd className="mt-1.5 font-medium">{project.role}</dd>
+                    <dt className="text-xs uppercase tracking-[0.18em] text-subtle">Platform</dt>
+                    <dd className="mt-1.5 font-medium">{project.platform}</dd>
                   </div>
+                  {project.role && (
+                    <div>
+                      <dt className="text-xs uppercase tracking-[0.18em] text-subtle">Role</dt>
+                      <dd className="mt-1.5 font-medium">{project.role}</dd>
+                    </div>
+                  )}
                   <div>
-                    <dt className="text-xs uppercase tracking-[0.18em] text-subtle">Stack</dt>
+                    <dt className="text-xs uppercase tracking-[0.18em] text-subtle">
+                      {project.stack.length > 0 ? "Stack" : "Highlights"}
+                    </dt>
                     <dd className="mt-2.5 flex flex-wrap gap-1.5">
-                      {project.stack.map((t) => (
+                      {(project.stack.length > 0 ? project.stack : project.tags).map((t) => (
                         <Badge key={t}>{t}</Badge>
                       ))}
                     </dd>
@@ -146,7 +203,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                         <Button asChild size="sm">
                           <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                             <ExternalLink />
-                            Live demo
+                            Visit live site
                           </a>
                         </Button>
                       ) : null}
@@ -159,9 +216,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                         </Button>
                       ) : null}
                       {!project.liveUrl && !project.sourceUrl && (
-                        <span className="text-sm text-muted-foreground">
-                          Private project. Demo available on request.
-                        </span>
+                        <span className="text-sm text-muted-foreground">Demo available on request.</span>
                       )}
                     </dd>
                   </div>
@@ -176,15 +231,21 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                 href={`/projects/${next.slug}`}
                 prefetch
                 transitionTypes={["nav-forward"]}
-                className="group flex items-center justify-between gap-6 rounded-3xl border border-border bg-card/50 p-6 transition-colors duration-500 hover:border-white/15 sm:p-8"
+                className="group grid items-center gap-6 overflow-hidden rounded-3xl border border-border bg-card/50 p-3 transition-colors duration-500 hover:border-white/15 sm:grid-cols-[1fr_280px]"
               >
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-[0.2em] text-subtle">Next project</p>
-                  <p className="mt-2 text-2xl font-semibold tracking-tight sm:text-4xl">{next.title}</p>
+                <div className="flex items-center justify-between gap-6 p-3 sm:p-5">
+                  <div>
+                    <p className="font-mono text-xs uppercase tracking-[0.2em] text-subtle">Next project</p>
+                    <p className="mt-2 text-2xl font-semibold tracking-tight sm:text-4xl">{next.title}</p>
+                    <p className="mt-2 line-clamp-2 max-w-lg text-sm text-muted-foreground">{next.summary}</p>
+                  </div>
+                  <span className="grid size-12 shrink-0 place-items-center rounded-full border border-border-strong transition-all duration-500 group-hover:border-transparent group-hover:bg-primary group-hover:text-primary-foreground sm:size-14">
+                    <ArrowRight className="size-5 transition-transform duration-500 group-hover:translate-x-0.5" />
+                  </span>
                 </div>
-                <span className="grid size-12 shrink-0 place-items-center rounded-full border border-border-strong transition-all duration-500 group-hover:border-transparent group-hover:bg-primary group-hover:text-primary-foreground sm:size-14">
-                  <ArrowRight className="size-5 transition-transform duration-500 group-hover:translate-x-0.5" />
-                </span>
+                <div className="group relative hidden overflow-hidden rounded-2xl sm:block">
+                  <ProjectVisual project={next} sizes="280px" />
+                </div>
               </Link>
             </Reveal>
           )}

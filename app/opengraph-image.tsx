@@ -1,11 +1,17 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { site } from "@/content/site";
 
 export const alt = `${site.name}, ${site.role}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpengraphImage() {
+export default async function OpengraphImage() {
+  // JPEG copy produced by `npm run media` (ImageResponse can't decode WebP).
+  const photo = await readFile(path.join(process.cwd(), "public", "me", "portrait-og.jpg"));
+  const photoSrc = `data:image/jpeg;base64,${photo.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -13,6 +19,7 @@ export default function OpengraphImage() {
           width: "100%",
           height: "100%",
           display: "flex",
+          position: "relative",
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 80,
@@ -21,6 +28,21 @@ export default function OpengraphImage() {
           color: "#f3f3f6",
         }}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse only renders <img> */}
+        <img
+          src={photoSrc}
+          alt=""
+          width={340}
+          height={425}
+          style={{
+            position: "absolute",
+            right: 80,
+            top: 102,
+            borderRadius: 36,
+            objectFit: "cover",
+            border: "2px solid rgba(255,255,255,0.14)",
+          }}
+        />
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <div
             style={{
@@ -53,11 +75,11 @@ export default function OpengraphImage() {
           >
             Developer
           </div>
-          <div style={{ marginTop: 28, fontSize: 30, color: "#a1a1ae", maxWidth: 900 }}>{site.tagline}</div>
+          <div style={{ marginTop: 28, fontSize: 28, color: "#a1a1ae", maxWidth: 600 }}>{site.tagline}</div>
         </div>
 
         <div style={{ display: "flex", gap: 14, fontSize: 22, color: "#a1a1ae" }}>
-          {["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Docker"].map((t) => (
+          {["Next.js", "TypeScript", "Node.js", "Docker"].map((t) => (
             <div
               key={t}
               style={{

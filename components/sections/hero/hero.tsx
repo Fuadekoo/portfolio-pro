@@ -9,7 +9,7 @@ import { MaskLine } from "@/components/motion/text-reveal";
 import { EASE_OUT_EXPO } from "@/components/motion/reveal";
 import { SocialLinks } from "@/components/social-links";
 import { AmbientBackground } from "@/components/sections/hero/ambient-background";
-import { CodeWindow } from "@/components/sections/hero/code-window";
+import { HeroPortrait } from "@/components/sections/hero/hero-portrait";
 import { RotatingText } from "@/components/sections/hero/rotating-text";
 
 function FadeIn({ children, delay, className }: { children: React.ReactNode; delay: number; className?: string }) {
@@ -113,8 +113,8 @@ export function Hero({ cvAvailable }: { cvAvailable: boolean }) {
           </FadeIn>
         </div>
 
-        <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-          <CodeWindow />
+        <div className="relative px-6 sm:px-10 lg:px-4">
+          <HeroPortrait />
         </div>
       </div>
 

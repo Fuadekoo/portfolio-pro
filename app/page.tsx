@@ -6,6 +6,7 @@ import { Hero } from "@/components/sections/hero/hero";
 import { TechMarquee } from "@/components/sections/tech-marquee";
 import { About } from "@/components/sections/about";
 import { Skills } from "@/components/sections/skills";
+import { Pipeline } from "@/components/sections/pipeline";
 import { Projects } from "@/components/sections/projects/projects";
 import { Experience } from "@/components/sections/experience";
 import { Services } from "@/components/sections/services";
@@ -42,6 +43,7 @@ export default function HomePage() {
       <TechMarquee />
       <About />
       <Skills />
+      <Pipeline />
       <Projects />
       <Experience />
       <Services />

@@ -2,16 +2,18 @@
 
 import Link from "next/link";
 import { ViewTransition } from "react";
-import { ArrowUpRight, ExternalLink } from "lucide-react";
-import type { Project } from "@/content/projects";
+import { ArrowUpRight, ExternalLink, Images } from "lucide-react";
+import { getProjectMedia, projectBadges, type Project } from "@/content/projects";
 import { GitHubIcon } from "@/components/icons";
-import { Badge, SampleBadge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge";
 import { trackPointer } from "@/components/spotlight-card";
 import { ProjectVisual } from "@/components/sections/projects/project-visual";
 import { cn } from "@/lib/utils";
 
 export function ProjectCard({ project }: { project: Project }) {
   const href = `/projects/${project.slug}`;
+  const { gallery } = getProjectMedia(project.slug);
+  const badges = projectBadges(project);
 
   return (
     <article
@@ -28,8 +30,11 @@ export function ProjectCard({ project }: { project: Project }) {
         </ViewTransition>
         <div className="absolute left-3 top-3 flex gap-1.5">
           <Badge className="border-white/10 bg-black/50 text-foreground/90 backdrop-blur-md">{project.category}</Badge>
-          {project.sample && <SampleBadge className="bg-black/50 backdrop-blur-md" />}
         </div>
+        <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-black/55 px-2.5 py-1 text-[11px] text-foreground/85 backdrop-blur-md">
+          <Images className="size-3" />
+          {gallery.length} {gallery.length === 1 ? "screen" : "screens"}
+        </span>
         <span
           aria-hidden="true"
           className="absolute right-3 top-3 grid size-10 translate-y-1 place-items-center rounded-full border border-white/15 bg-black/50 text-foreground opacity-0 backdrop-blur-md transition-all duration-500 ease-out-expo group-hover:translate-y-0 group-hover:opacity-100"
@@ -56,17 +61,19 @@ export function ProjectCard({ project }: { project: Project }) {
         </div>
         <p className="mt-2.5 text-[15px] leading-relaxed text-muted-foreground">{project.summary}</p>
 
-        <ul className="mt-5 flex flex-wrap gap-1.5" aria-label="Tech stack">
-          {project.stack.map((tech) => (
-            <li key={tech}>
-              <Badge size="sm">{tech}</Badge>
+        <ul className="mt-5 flex flex-wrap gap-1.5" aria-label={project.stack.length ? "Tech stack" : "Highlights"}>
+          {badges.map((badge) => (
+            <li key={badge}>
+              <Badge size="sm">{badge}</Badge>
             </li>
           ))}
         </ul>
 
         <div className="mt-auto flex items-center justify-between gap-3 pt-6">
-          <p className="text-[13px] text-subtle">
-            <span className="text-muted-foreground">Role</span> · {project.role}
+          <p className="truncate text-[13px] text-subtle">
+            {project.client ? <span className="text-muted-foreground">{project.client}</span> : null}
+            {project.client ? " · " : ""}
+            {project.platform}
           </p>
           <div className="relative z-2 flex items-center gap-1">
             {project.liveUrl && (

@@ -20,7 +20,7 @@ export function Projects() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[600px] bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgb(110_139_255/0.08),transparent)]" />
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading
-          index="03"
+          index="04"
           eyebrow="Selected work"
           title="Featured projects."
           description="A selection of products I've designed, built and shipped. Open any project for the full case study."

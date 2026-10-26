@@ -88,7 +88,7 @@ export function Experience() {
     <section id="experience" className="relative scroll-mt-20 py-28 sm:py-36">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading
-          index="04"
+          index="05"
           eyebrow="Journey"
           title="Experience & education."
           description="Where I've worked, what I studied and the milestones along the way."

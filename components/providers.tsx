@@ -30,7 +30,8 @@ export function Providers({ children }: { children: ReactNode }) {
     const lenis = new Lenis({
       autoRaf: true,
       lerp: 0.11,
-      anchors: { offset: -72 },
+      // Sections set `scroll-margin-top` to clear the fixed header; Lenis honours it.
+      anchors: true,
       // Respect scrollable regions such as the mobile menu.
       prevent: (node) => node.closest("[data-lenis-prevent]") !== null,
     });
@@ -46,7 +47,7 @@ export function Providers({ children }: { children: ReactNode }) {
       scrollTo(target) {
         const lenis = lenisRef.current;
         if (lenis) {
-          lenis.scrollTo(target, { offset: typeof target === "string" ? -72 : 0 });
+          lenis.scrollTo(target);
           return;
         }
         if (typeof target === "number") {

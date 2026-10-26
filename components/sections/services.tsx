@@ -31,7 +31,7 @@ export function Services() {
     <section id="services" className="relative scroll-mt-20 py-28 sm:py-36">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading
-          index="05"
+          index="06"
           eyebrow="Services"
           title="How I can help."
           description="From a first prototype to a production system with pipelines and monitoring, I can take on a whole product or one well-defined piece of it."
