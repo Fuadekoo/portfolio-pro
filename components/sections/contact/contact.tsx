@@ -11,6 +11,8 @@ import { CopyButton } from "@/components/sections/contact/copy-email";
 import { TelegramIcon } from "@/components/icons";
 
 export function Contact() {
+  const telegram = site.socials.find((s) => s.icon === "telegram" && s.href);
+
   return (
     <section id="contact" className="relative isolate scroll-mt-20 overflow-hidden py-28 sm:py-36">
       <AmbientBackground variant="contact" />
