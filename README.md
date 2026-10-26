@@ -13,7 +13,7 @@ An animated full-stack developer portfolio built with **Next.js 16 (App Router, 
 - Scroll-linked career timeline, services, optional testimonials/achievements
 - Working contact form (Server Action + Resend) with client and server validation
 - Scroll progress bar, active-section navigation, accessible mobile menu, cursor glow
-- Generated favicon, Open Graph image, sitemap, robots, web manifest and JSON-LD
+- Favicons and app icons built from the logo, Open Graph image, sitemap, robots, web manifest and JSON-LD
 - Respects `prefers-reduced-motion` everywhere; keyboard accessible; fully static output
 
 ## Getting started
@@ -61,6 +61,10 @@ Honesty rules built into the content layer:
   personal before adding one. Run `npm run media` to frame mobile screens, compose covers and
   regenerate `public/projects/` and `content/media.generated.ts` (sizes + blur placeholders).
   Choose which screenshots are published in `scripts/build-media.mjs`.
+- **Logo and icons:** `public/logo.svg` is the source. Run `npm run brand` to rebuild the navbar
+  mark (`public/brand/mark*.png`, with a light "F" for the dark theme), `app/favicon.ico`,
+  `app/icon.png`, `app/apple-icon.png` and the manifest icons. Only the `<F>.` mark is used;
+  the "Fuad" wordmark is unreadable at icon sizes.
 - **Device mockups:** each project's `showcase` in `content/projects.ts` picks which screens
   appear on the laptop and the phone in its card and case-study hero.
 
@@ -102,7 +106,7 @@ app/
   actions/contact.ts        Server Action for the contact form
   projects/[slug]/          Case-study pages (statically generated)
   layout.tsx, page.tsx      Shell, metadata, home page
-  icon.tsx, apple-icon.tsx, opengraph-image.tsx, sitemap.ts, robots.ts, manifest.ts
+  favicon.ico, icon.png, apple-icon.png (from `npm run brand`), opengraph-image.tsx, sitemap.ts, robots.ts, manifest.ts
   globals.css               Design tokens, effect utilities, keyframes, view transitions
 components/
   ui/                       shadcn/ui-style primitives (button, badge, input, …)

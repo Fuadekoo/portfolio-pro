@@ -105,15 +105,14 @@ function Laptop({
           />
           {/* Glass: a fixed glare plus an occasional light sweep. */}
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/7 via-transparent to-transparent" />
-          {shine && (
-            <motion.div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-y-0 w-1/3 -skew-x-12 bg-linear-to-r from-transparent via-white/10 to-transparent"
-              initial={{ left: "-40%" }}
-              animate={{ left: "140%" }}
-              transition={{ duration: 1.6, ease: "easeInOut", repeat: Infinity, repeatDelay: 5 }}
-            />
-          )}
+          {/* Always rendered (parked off-screen when still) so server and client markup match. */}
+          <motion.div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 w-1/3 -skew-x-12 bg-linear-to-r from-transparent via-white/10 to-transparent"
+            initial={{ left: "-40%" }}
+            animate={shine ? { left: "140%" } : undefined}
+            transition={{ duration: 1.6, ease: "easeInOut", repeat: Infinity, repeatDelay: 5 }}
+          />
         </div>
       </div>
       {/* Base */}

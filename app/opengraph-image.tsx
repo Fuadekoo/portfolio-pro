@@ -11,6 +11,8 @@ export default async function OpengraphImage() {
   // JPEG copy produced by `npm run media` (ImageResponse can't decode WebP).
   const photo = await readFile(path.join(process.cwd(), "public", "me", "portrait-og.jpg"));
   const photoSrc = `data:image/jpeg;base64,${photo.toString("base64")}`;
+  const mark = await readFile(path.join(process.cwd(), "public", "brand", "mark-dark.png"));
+  const markSrc = `data:image/png;base64,${mark.toString("base64")}`;
 
   return new ImageResponse(
     (
@@ -44,21 +46,8 @@ export default async function OpengraphImage() {
           }}
         />
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <div
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: 18,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "linear-gradient(135deg, #6e8bff, #a77bff)",
-              fontSize: 36,
-              fontStyle: "italic",
-            }}
-          >
-            {site.initials}
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse only renders <img> */}
+          <img src={markSrc} alt="" width={107} height={56} />
           <div style={{ fontSize: 30, fontWeight: 600 }}>{site.name}</div>
         </div>
 

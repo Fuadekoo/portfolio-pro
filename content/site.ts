@@ -22,7 +22,6 @@ export type Stat = {
 export const site = {
   // TODO: replace with your full name.
   name: "Fuad",
-  initials: "F",
   role: "Full-Stack Developer",
   specialties: [
     "Next.js Developer",

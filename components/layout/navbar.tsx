@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Dialog } from "radix-ui";
@@ -44,14 +45,10 @@ function useActiveSection(enabled: boolean) {
 export function Logo({ className }: { className?: string }) {
   return (
     <span className={cn("flex items-center gap-2.5", className)}>
-      <span className="border-gradient relative grid size-9 place-items-center rounded-xl bg-ink/4 font-display text-xl italic text-foreground">
-        {site.initials}
-        <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-brand shadow-[0_0_12px] shadow-brand" />
-      </span>
-      <span className="text-[15px] font-semibold tracking-tight">
-        {site.name}
-        <span className="text-brand">.</span>
-      </span>
+      {/* Mark from public/logo.svg (`npm run brand`); the dark theme swaps in a light "F". */}
+      <Image src="/brand/mark-dark.png" alt="" width={54} height={28} className="h-7 w-auto light:hidden" />
+      <Image src="/brand/mark.png" alt="" width={54} height={28} className="hidden h-7 w-auto light:block" />
+      <span className="text-[15px] font-semibold tracking-tight">{site.name}</span>
     </span>
   );
 }
