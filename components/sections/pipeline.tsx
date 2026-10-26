@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { failureModes, pipeline, pipelineFacts, type FailureMode, type PipelineStage } from "@/content/pipeline";
 import { SectionHeading } from "@/components/section-heading";
+import { CodeWindow } from "@/components/code-window";
 import { Reveal } from "@/components/motion/reveal";
 import { TechIcon } from "@/components/tech-icon";
 import { cn } from "@/lib/utils";
@@ -276,12 +277,12 @@ export function Pipeline() {
   return (
     <section id="workflow" className="relative scroll-mt-20 py-28 sm:py-36">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <SectionHeading
-          index="03"
-          eyebrow="DevOps"
-          title="From commit to production."
-          description="Every project ships through an automated pipeline: checked in CI, packaged as a Docker image and deployed without downtime. Push a commit, change the speed or inject a failure to see how the pipeline protects production."
-        />
+        <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12">
+          <SectionHeading index="03" eyebrow="DevOps" title="From commit to production." description="Every project ships through an automated pipeline: checked in CI, packaged as a Docker image and deployed without downtime. Push a commit, change the speed or inject a failure to see how the pipeline protects production." />
+          <div className="mx-auto w-full max-w-xl px-2 sm:px-6 lg:px-0">
+            <CodeWindow />
+          </div>
+        </div>
 
         <Reveal className="mt-16">
           <motion.div

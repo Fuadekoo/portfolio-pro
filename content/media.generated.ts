@@ -313,3 +313,12 @@ export const portrait: MediaImage = {
   "blurDataURL": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAACwAwCdASoQABQAPu1iqU2ppaOiMAgBMB2JYgCsAB6AJ+wuOPzNJAD+7AHS7DmzPdqpCbe4YimXW6JZ4m4lQhvrzb3Uwuv+CTJD95lvDqi1MaQIDQbBy/jNjX5udlcYEDSR7kAA",
   "alt": "Portrait of Fuad"
 };
+
+/** Same portrait with the background removed (transparent). */
+export const portraitCutout: MediaImage = {
+  "src": "/me/portrait-cutout.webp",
+  "width": 900,
+  "height": 801,
+  "blurDataURL": "data:image/webp;base64,UklGRs4AAABXRUJQVlA4WAoAAAAQAAAADwAADQAAQUxQSGsAAAABcFpr25t8aS4+AWRnA7AMUBWj4HrV0XRQLIHuMEJV+Kjypn5ZISImgEKb9/8+TcyyDeAlMroIphjrgFNhzAKoMpIWgJEYJag/wGwpEdoFoctSmIHIU0Bsm1HWXCUywD5Q0eY5hS5ido5xngBWUDggPAAAABACAJ0BKhAADgADgFoljALsAQ3ixX/LkAAA/vVxaGozj9nZfEbNZ/HZ4Z3jcdYllBs0eTipfHvrDzgAAA==",
+  "alt": "Portrait of Fuad"
+};

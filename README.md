@@ -62,6 +62,20 @@ Honesty rules built into the content layer:
   Choose which screenshots are published in `scripts/build-media.mjs`. Screens showing personal
   data (student records, ID cards, phone numbers) are deliberately excluded there.
 
+### Light & dark theme
+
+The toggle in the navbar switches themes (following the OS setting until a visitor chooses).
+Colours are CSS variables in `app/globals.css`: `:root` for dark, `:root[data-theme="light"]` for
+light. Use the `ink` colour (`bg-ink/5`, `border-ink/10`) for hairlines and tints instead of
+white/black so they flip with the theme, and add `theme-dark` to any element that should stay
+dark in both themes (screenshot frames, the pipeline console, the code window).
+
+### Hero portrait
+
+The hero uses a background-removed cutout of `data/fufu.jpg`, saved as `data/fufu-cutout.png`
+(made with `@imgly/background-removal-node`). To use a new photo, replace both files and run
+`npm run media`.
+
 ## Contact form
 
 The form posts to a Server Action (`app/actions/contact.ts`) that sends mail through the

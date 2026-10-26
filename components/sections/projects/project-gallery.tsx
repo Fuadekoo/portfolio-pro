@@ -42,8 +42,8 @@ function Slide({ image, priority, large = false }: { image: MediaImage; priority
         height={image.height}
         priority={priority}
         sizes="(min-width: 1152px) 1152px, 100vw"
-        placeholder="blur"
-        blurDataURL={image.blurDataURL}
+        // Transparent phone frames skip the blur placeholder (Next renders it as an opaque box).
+        {...(mobile ? {} : { placeholder: "blur" as const, blurDataURL: image.blurDataURL })}
         className={cn(
           "h-auto max-h-full w-auto max-w-full object-contain",
           !mobile && "rounded-xl border border-ink/10 shadow-[0_30px_80px_-20px_rgb(0_0_0/0.9)]",
