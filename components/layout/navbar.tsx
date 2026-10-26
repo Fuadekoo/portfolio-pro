@@ -46,8 +46,8 @@ export function Logo({ className }: { className?: string }) {
   return (
     <span className={cn("flex items-center gap-2.5", className)}>
       {/* Mark from public/logo.svg (`npm run brand`); the dark theme swaps in a light "F". */}
-      <Image src="/brand/mark-dark.png" alt="" width={54} height={28} className="h-7 w-auto light:hidden" />
-      <Image src="/brand/mark.png" alt="" width={54} height={28} className="hidden h-7 w-auto light:block" />
+      <Image src="/brand/mark-dark.png" alt="" width={107} height={56} className="h-7 w-auto light:hidden" />
+      <Image src="/brand/mark.png" alt="" width={107} height={56} className="hidden h-7 w-auto light:block" />
       <span className="text-[15px] font-semibold tracking-tight">{site.name}</span>
     </span>
   );
